@@ -1,2 +1,5 @@
 Archivo de prueba del colaborador
-Carlos Luque
+Carlos Luque Ortega
+Hola
+Adios
+Bueno
