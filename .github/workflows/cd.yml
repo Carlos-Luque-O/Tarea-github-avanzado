@@ -33,8 +33,18 @@ jobs:
   validate-prod:
     needs: bump-version
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: powershell
     steps:
       - uses: actions/checkout@v4
- 
+
       - name: Validar entorno de producción
-        run: pwsh
+        env:
+          SECRET_PROD_TOKEN: ${{ secrets.PROD_TOKEN }}
+        run: |
+          if ($env:SECRET_PROD_TOKEN -ne $env:LOCAL_PROD_TOKEN) {
+            Write-Error "Error: El token de producción no coincide"
+            exit 1
+          }
+          Write-Host "Token de producción validado correctamente"
